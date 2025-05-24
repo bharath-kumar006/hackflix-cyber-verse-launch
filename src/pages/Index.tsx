@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Play, Shield, Target, Users, Zap, Download, Star, Globe, Code, Lock, Eye } from 'lucide-react';
+import { ArrowRight, Play, Shield, Target, Users, Zap, Download, Star, Globe, Code, Lock, Eye, Menu, X } from 'lucide-react';
 
 const Index = () => {
   const [typedText, setTypedText] = useState('');
   const [currentQuote, setCurrentQuote] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   const fullText = "Become Top 1% Hacker";
   
@@ -53,73 +54,121 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950 to-slate-950 text-white overflow-hidden">
       {/* Top Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-slate-950/90 backdrop-blur-sm border-b border-slate-800">
+      <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-xl border-b border-purple-500/20">
         <div className="container mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
-              <Code className="w-5 h-5 text-white" />
+            <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center">
+              <Code className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               HackingFlix
             </span>
           </div>
-          <div className="flex items-center space-x-4">
+          
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-8">
+            <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors">Courses</a>
+            <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors">Labs</a>
+            <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors">Community</a>
+            <a href="#" className="text-slate-300 hover:text-purple-400 transition-colors">Careers</a>
+          </div>
+          
+          <div className="hidden md:flex items-center space-x-4">
             <span className="text-slate-300">Already a member?</span>
-            <Button variant="ghost" className="text-green-400 hover:bg-green-400/10">
+            <Button variant="ghost" className="text-purple-400 hover:bg-purple-400/10 border border-purple-400/30">
               Login
             </Button>
-            <Button className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600">
+            <Button className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 shadow-lg shadow-purple-500/25">
               Join for FREE
             </Button>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button 
+            className="md:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-black/90 backdrop-blur-xl border-t border-purple-500/20">
+            <div className="px-6 py-4 space-y-4">
+              <a href="#" className="block text-slate-300 hover:text-purple-400">Courses</a>
+              <a href="#" className="block text-slate-300 hover:text-purple-400">Labs</a>
+              <a href="#" className="block text-slate-300 hover:text-purple-400">Community</a>
+              <a href="#" className="block text-slate-300 hover:text-purple-400">Careers</a>
+              <div className="pt-4 space-y-2">
+                <Button variant="ghost" className="w-full text-purple-400 hover:bg-purple-400/10 border border-purple-400/30">
+                  Login
+                </Button>
+                <Button className="w-full bg-gradient-to-r from-purple-500 to-blue-500">
+                  Join for FREE
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="container mx-auto text-center">
-          <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+      <section className="pt-32 pb-20 px-6 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-blue-600/10 rounded-full blur-3xl transform -rotate-12 scale-150"></div>
+        <div className="container mx-auto text-center relative z-10">
+          <div className="mb-12">
+            <Badge className="mb-6 bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
+              🚀 Join 1.2M+ Learners Worldwide
+            </Badge>
+            <h1 className="text-5xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent leading-tight">
               {typedText}
-              <span className="animate-pulse">|</span>
+              <span className="animate-pulse text-purple-400">|</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-300 mb-8 max-w-3xl mx-auto">
-              Tech companies, Governments, Banks, LEA, all need Hackers
+            <p className="text-xl md:text-2xl text-slate-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+              Tech companies, Governments, Banks, LEA - everyone needs skilled ethical hackers. 
+              Start your journey into cybersecurity with gamified learning.
             </p>
-            <Button size="lg" className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-lg px-8 py-6">
-              Join for FREE
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </div>
-          <div className="text-slate-400">
-            <span className="text-2xl font-bold text-green-400">1.2M</span> Learners Worldwide
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Button size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-lg px-8 py-6 shadow-lg shadow-purple-500/25">
+                Start Learning Now
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-purple-400/30 text-purple-300 hover:bg-purple-400/10 text-lg px-8 py-6">
+                <Play className="mr-2 w-5 h-5" />
+                Watch Demo
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Impact Section */}
-      <section className="py-20 px-6 bg-slate-900/50">
+      {/* Impact Stats */}
+      <section className="py-20 px-6">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Impact at Scale</h2>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Impact at Scale
+            </h2>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Our learners have transformed their lives with groundbreaking career advancements in cybersecurity.
+              Our learners have transformed their careers with breakthrough achievements in cybersecurity
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              { label: "Careers Transformed", value: "3,823", color: "text-green-400" },
-              { label: "Highest CTC", value: "₹1.2 Cr", color: "text-blue-400" },
-              { label: "Avg. CTC", value: "₹25 Lakhs", color: "text-purple-400" },
-              { label: "Highest Salary Hike", value: "350%", color: "text-red-400" },
-              { label: "Average Rating", value: "4.9⭐", color: "text-yellow-400" },
-              { label: "Hiring Partners", value: "1000+", color: "text-indigo-400" }
+              { label: "Careers Transformed", value: "3,823", color: "from-purple-400 to-pink-400" },
+              { label: "Highest CTC", value: "₹1.2 Cr", color: "from-blue-400 to-cyan-400" },
+              { label: "Avg. CTC", value: "₹25 Lakhs", color: "from-green-400 to-blue-400" },
+              { label: "Highest Salary Hike", value: "350%", color: "from-orange-400 to-red-400" },
+              { label: "Average Rating", value: "4.9⭐", color: "from-yellow-400 to-orange-400" },
+              { label: "Hiring Partners", value: "1000+", color: "from-indigo-400 to-purple-400" }
             ].map((stat, index) => (
-              <Card key={index} className="bg-slate-800/50 border-slate-700 hover:border-slate-600 transition-all duration-300">
+              <Card key={index} className="bg-slate-800/50 backdrop-blur-sm border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 group">
                 <CardContent className="p-6 text-center">
-                  <div className={`text-2xl md:text-3xl font-bold ${stat.color} mb-2`}>
+                  <div className={`text-2xl md:text-3xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300`}>
                     {stat.value}
                   </div>
                   <div className="text-slate-300 text-sm">{stat.label}</div>
@@ -130,42 +179,46 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-6">
+      {/* Features Grid */}
+      <section className="py-20 px-6 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
         <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Building Next-Gen Hackers!</h2>
+            <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Why Choose Us?
+            </h2>
+            <p className="text-xl text-slate-300">Discover what makes our cybersecurity training unique</p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: <Target className="w-8 h-8" />,
-                title: "Hack Real-World Systems",
-                description: "Practice on actual vulnerable systems in controlled environments"
+                icon: <Target className="w-12 h-12" />,
+                title: "Real-World Hacking",
+                description: "Practice on actual vulnerable systems in safe, controlled environments"
               },
               {
-                icon: <Zap className="w-8 h-8" />,
-                title: "Live Attack Simulations",
-                description: "Experience real-time cyber attacks and learn to defend"
+                icon: <Zap className="w-12 h-12" />,
+                title: "Live Simulations",
+                description: "Experience real-time cyber attacks and learn advanced defense strategies"
               },
               {
-                icon: <Shield className="w-8 h-8" />,
-                title: "Hands-on Hacking Labs",
-                description: "Interactive labs with cutting-edge tools and techniques"
+                icon: <Shield className="w-12 h-12" />,
+                title: "Hands-on Labs",
+                description: "Interactive labs with cutting-edge tools used by industry professionals"
               },
               {
-                icon: <Users className="w-8 h-8" />,
-                title: "Job-Ready Curriculum",
-                description: "Industry-aligned content that gets you hired faster"
+                icon: <Users className="w-12 h-12" />,
+                title: "Job Guarantee",
+                description: "100% job assurance with our industry-aligned curriculum and placement support"
               }
             ].map((feature, index) => (
-              <Card key={index} className="bg-slate-800/50 border-slate-700 hover:border-green-500/50 transition-all duration-300 group">
-                <CardContent className="p-6">
-                  <div className="text-green-400 mb-4 group-hover:scale-110 transition-transform duration-300">
+              <Card key={index} className="bg-slate-800/50 backdrop-blur-sm border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 group hover:scale-105">
+                <CardContent className="p-8 text-center">
+                  <div className="text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                  <p className="text-slate-300">{feature.description}</p>
+                  <h3 className="text-xl font-semibold mb-4 text-white">{feature.title}</h3>
+                  <p className="text-slate-300 leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -173,17 +226,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Company Logos */}
-      <section className="py-20 px-6 bg-slate-900/50">
+      {/* Companies Section */}
+      <section className="py-20 px-6">
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Our Alumni at Top Tech Companies
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 items-center">
             {companies.map((company, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-slate-800 rounded-lg p-4 hover:bg-slate-700 transition-all duration-300">
-                  <span className="text-slate-300 font-semibold">{company}</span>
+              <div key={index} className="text-center group">
+                <div className="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 hover:bg-slate-700/50 transition-all duration-300 border border-slate-700/50 hover:border-purple-500/50 group-hover:scale-105">
+                  <span className="text-slate-300 font-semibold group-hover:text-purple-300 transition-colors">{company}</span>
                 </div>
               </div>
             ))}
@@ -191,94 +244,31 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Why Choose Us</h2>
-            <p className="text-xl text-slate-300">Discover what makes our programs unique</p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Self-paced video content",
-                description: "Master new skills on your schedule with our flexible, self-paced video content."
-              },
-              {
-                title: "Support sessions with Mentors",
-                description: "Overcome challenges fast with dedicated mentor support sessions."
-              },
-              {
-                title: "Gamified approach",
-                description: "Gain practical skills through our gamified approach for real results."
-              },
-              {
-                title: "Network of 1000+ learners",
-                description: "Tap into our vast network of learners, enhancing your learning experience."
-              },
-              {
-                title: "100% Job Assurance",
-                description: "Get all the support to crack your dream tech job."
-              },
-              {
-                title: "Industry Recognition",
-                description: "Certificates recognized by top cybersecurity companies worldwide."
-              }
-            ].map((item, index) => (
-              <Card key={index} className="bg-slate-800/50 border-slate-700 hover:border-blue-500/50 transition-all duration-300">
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-semibold mb-3 text-blue-400">{item.title}</h3>
-                  <p className="text-slate-300">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Famous Quotes */}
-      <section className="py-20 px-6 bg-slate-900/50">
-        <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="min-h-[200px] flex items-center justify-center">
-              <div key={currentQuote} className="animate-fade-in">
-                <blockquote className="text-2xl md:text-3xl font-light mb-8 text-slate-200">
-                  "{quotes[currentQuote].text}"
-                </blockquote>
-                <cite className="text-green-400 font-semibold">
-                  {quotes[currentQuote].author}
-                  <span className="text-slate-400 block">{quotes[currentQuote].title}</span>
-                </cite>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Video Testimonial */}
-      <section className="py-20 px-6">
+      {/* Testimonial */}
+      <section className="py-20 px-6 bg-gradient-to-r from-purple-900/30 to-blue-900/30">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
-            <Card className="bg-slate-800/50 border-slate-700">
-              <CardContent className="p-8">
-                <div className="flex flex-col md:flex-row gap-8 items-center">
-                  <div className="relative">
-                    <div className="w-48 h-48 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center">
-                      <Play className="w-16 h-16 text-green-400" />
+            <Card className="bg-slate-800/50 backdrop-blur-sm border-slate-700/50 hover:border-purple-500/50 transition-all duration-300">
+              <CardContent className="p-8 md:p-12">
+                <div className="flex flex-col lg:flex-row gap-8 items-center">
+                  <div className="relative group">
+                    <div className="w-64 h-64 bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center relative overflow-hidden">
+                      <Play className="w-20 h-20 text-white group-hover:scale-110 transition-transform duration-300" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
-                    <Badge className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-green-500">
+                    <Badge className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-500 to-blue-500">
                       Success Story
                     </Badge>
                   </div>
-                  <div className="flex-1">
-                    <blockquote className="text-lg text-slate-200 mb-6">
-                      "Joining this gamified learning platform was a game-changer for me. The interactive challenges and real-world scenarios kept me engaged and made complex concepts easy to grasp. Thanks to this platform, I cracked my dream job at Microsoft!"
+                  <div className="flex-1 text-center lg:text-left">
+                    <blockquote className="text-lg md:text-xl text-slate-200 mb-6 leading-relaxed italic">
+                      "HackingFlix was a complete game-changer for my cybersecurity career. The gamified learning approach made complex concepts incredibly engaging. The hands-on labs and real-world scenarios were exactly what prepared me for industry challenges. Thanks to this platform, I landed my dream job at Microsoft!"
                     </blockquote>
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <div className="font-semibold text-green-400">Rahul Sharma</div>
-                        <div className="text-slate-400">Cybersecurity Engineer</div>
-                        <div className="text-slate-400">Non-Tech Background → Microsoft</div>
+                    <div className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
+                      <div className="text-center sm:text-left">
+                        <div className="font-bold text-lg bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">Rahul Sharma</div>
+                        <div className="text-slate-400">Cybersecurity Engineer at Microsoft</div>
+                        <div className="text-slate-500 text-sm">Non-Tech Background → ₹45 LPA</div>
                       </div>
                     </div>
                   </div>
@@ -289,27 +279,33 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Career Roadmap Download */}
-      <section className="py-20 px-6 bg-slate-900/50">
+      {/* Career Roadmap */}
+      <section className="py-20 px-6">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">Confused about career?</h2>
-            <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-              Kickstart your cybersecurity career with a clear, step-by-step roadmap. Download this free guide and discover exactly what to learn and how to land your dream job.
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Confused about your career?
+            </h2>
+            <p className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto">
+              Kickstart your cybersecurity journey with our comprehensive roadmap. Download this free guide and discover exactly what to learn and how to land your dream job.
             </p>
-            <div className="flex flex-col md:flex-row items-center gap-8 justify-center">
-              <div className="w-64 h-80 bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg flex items-center justify-center">
-                <div className="text-center">
-                  <Lock className="w-16 h-16 text-green-400 mx-auto mb-4" />
-                  <h3 className="text-xl font-bold text-green-400">Secrets of Hacking</h3>
-                  <p className="text-slate-300">Career Roadmap</p>
+            <div className="flex flex-col lg:flex-row items-center gap-12 justify-center">
+              <div className="relative group">
+                <div className="w-80 h-96 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl flex items-center justify-center border border-slate-700 group-hover:border-purple-500/50 transition-all duration-300 group-hover:scale-105">
+                  <div className="text-center">
+                    <Lock className="w-20 h-20 text-purple-400 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
+                    <h3 className="text-2xl font-bold text-purple-400 mb-2">Secrets of Hacking</h3>
+                    <p className="text-slate-300 text-lg">Career Roadmap 2024</p>
+                    <Badge className="mt-4 bg-gradient-to-r from-purple-500 to-blue-500">FREE Download</Badge>
+                  </div>
                 </div>
               </div>
-              <div>
-                <Button size="lg" className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600">
-                  <Download className="mr-2 w-5 h-5" />
+              <div className="text-center lg:text-left">
+                <Button size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-lg px-8 py-6 shadow-lg shadow-purple-500/25">
+                  <Download className="mr-2 w-6 h-6" />
                   Download Free Guide
                 </Button>
+                <p className="text-slate-400 mt-4 text-sm">✓ No spam, just pure value</p>
               </div>
             </div>
           </div>
@@ -317,45 +313,45 @@ const Index = () => {
       </section>
 
       {/* Trusted Section */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
         <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8">
-            Trusted Worldwide by <span className="text-green-400">1.2 Million</span> Learners
+          <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+            Trusted Worldwide by <span className="text-white">1.2 Million</span> Learners
           </h2>
-          <div className="flex justify-center items-center gap-8">
-            <Globe className="w-16 h-16 text-blue-400 animate-pulse" />
-            <div className="text-6xl font-bold text-green-400">1,200,000+</div>
-            <Eye className="w-16 h-16 text-purple-400 animate-pulse" />
+          <div className="flex justify-center items-center gap-12">
+            <Globe className="w-20 h-20 text-purple-400 animate-pulse" />
+            <div className="text-7xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">1,200,000+</div>
+            <Eye className="w-20 h-20 text-blue-400 animate-pulse" />
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-20 px-6 bg-slate-950 border-t border-slate-800">
+      <footer className="py-20 px-6 bg-slate-950 border-t border-purple-500/20">
         <div className="container mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8">
-              Your first step into the world of <span className="text-green-400">hacking</span>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-bold mb-8 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              Your first step into the world of <span className="text-white">hacking</span>
             </h2>
-            <Button size="lg" className="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-lg px-8 py-6">
+            <Button size="lg" className="bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-lg px-8 py-6 shadow-lg shadow-purple-500/25">
               Join for FREE
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
           
           <div className="border-t border-slate-800 pt-12">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="flex flex-col lg:flex-row justify-between items-center gap-8">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-lg flex items-center justify-center">
-                  <Code className="w-5 h-5 text-white" />
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-400 to-blue-500 rounded-xl flex items-center justify-center">
+                  <Code className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
                   HackingFlix
                 </span>
               </div>
               
               <div className="text-center">
-                <div className="text-green-400 font-semibold text-lg mb-2">#LetsHack</div>
+                <div className="text-purple-400 font-bold text-xl mb-2">#LetsHack</div>
                 <div className="text-slate-400">
                   Contact: hello@hackingflix.com
                 </div>
@@ -363,14 +359,14 @@ const Index = () => {
               
               <div className="flex gap-4">
                 {['Twitter', 'LinkedIn', 'GitHub', 'Discord'].map((social) => (
-                  <Button key={social} variant="ghost" size="sm" className="text-slate-400 hover:text-green-400">
+                  <Button key={social} variant="ghost" size="sm" className="text-slate-400 hover:text-purple-400 border border-slate-700 hover:border-purple-500/50">
                     {social}
                   </Button>
                 ))}
               </div>
             </div>
             
-            <div className="text-center mt-8 pt-8 border-t border-slate-800">
+            <div className="text-center mt-12 pt-8 border-t border-slate-800">
               <p className="text-slate-500">
                 © 2024 HackingFlix. All rights reserved. Building the next generation of cybersecurity professionals.
               </p>
