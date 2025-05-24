@@ -28,39 +28,24 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-gradient-to-r from-purple-900/20 to-blue-900/20 relative overflow-hidden">
-      <div className="absolute inset-0 cyber-grid opacity-10"></div>
-      <div className="matrix-rain opacity-5"></div>
-      
-      {/* Floating Elements */}
-      <div className="absolute top-10 left-10 w-16 h-16 border border-purple-400/30 rounded-lg rotate-45 float-animation cyberpunk-border"></div>
-      <div className="absolute bottom-10 right-10 w-20 h-20 border border-cyan-400/30 rounded-full float-animation-delayed cyberpunk-border"></div>
-      
-      <div className="container mx-auto relative z-10">
-        <div className="text-center mb-16 perspective-container">
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent neon-glow tilt-effect">
+    <section className="py-20 px-6 bg-gradient-to-r from-purple-900/20 to-blue-900/20">
+      <div className="container mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
             Why Choose Us?
           </h2>
-          <p className="text-xl text-slate-300">Discover what makes our <span className="text-purple-400">cybersecurity training</span> unique</p>
+          <p className="text-xl text-slate-300">Discover what makes our cybersecurity training unique</p>
         </div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
-            <Card key={index} className="cyber-card group perspective-container cursor-pointer">
-              <CardContent className="p-8 text-center relative overflow-hidden">
-                <div className="absolute inset-0 hologram-effect opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
-                
-                <div className="text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center relative z-10 float-animation-slow">
-                  <div className="p-4 rounded-full bg-gradient-to-r from-purple-500/20 to-blue-500/20 group-hover:from-purple-400/30 group-hover:to-blue-400/30 transition-colors duration-300 cyberpunk-border">
-                    {feature.icon}
-                  </div>
+            <Card key={index} className="bg-slate-800/50 backdrop-blur-sm border-slate-700/50 hover:border-purple-500/50 transition-all duration-300 group hover:scale-105">
+              <CardContent className="p-8 text-center">
+                <div className="text-purple-400 mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                  {feature.icon}
                 </div>
-                
-                <h3 className="text-xl font-semibold mb-4 text-white relative z-10 neon-glow">{feature.title}</h3>
-                <p className="text-slate-300 leading-relaxed relative z-10">{feature.description}</p>
-                
-                {/* Scan line effect */}
-                <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                <h3 className="text-xl font-semibold mb-4 text-white">{feature.title}</h3>
+                <p className="text-slate-300 leading-relaxed">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
